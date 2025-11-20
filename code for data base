@@ -1,0 +1,77 @@
+import sqlite3
+import datetime
+from typing import List,Dict
+
+DB_FILE = "diary.db"
+
+def init_db():
+    """
+    Initialize the database and create the 'entries' table if it doesn't exist.
+    """
+    with sqlite3.connect(DB_FILE) as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS entries
+(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          text TEXT,
+          emotion TEXT,
+          sentiment REAL
+        )
+    """)
+    conn.commit()
+    
+
+def add_entry(text: str, emotion: str, sentiment: float) -> None:
+    """
+    Add a new diary entry.
+    """
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO entries(created_at, text, emotion, sentiment) VALUES (?,?,?,?)",
+                   (now, text, emotion, sentiment))
+            conn.commit()
+    except sqlite3.Error as e:
+        print(f"Error adding entry: {e}")
+
+
+def get_entries() -> List[Dict]:
+    """
+    Retrieve all diary entries, most recent frist.
+    """
+    entries = []
+    try:
+        with sqlite3.connect(DB_FILE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, created_at, text, emotion, sentiment FROM entries ORDER BY created_at DESC")
+            rows = cursor.fetchall()
+            for row in rows:
+                entries.append({
+                   "id": row[0],
+                   "created_at": row[1],
+                   "text": row[2],
+                   "emotion": row[3],
+                   "sentiment": row[4]
+                })
+    except sqlite3.Error as e:
+       print(f"Error fetching entries:{e}")
+    return entries
+
+if __name__ == "__main__":
+    init_db()
+    print(" welcome to your diary")
+    text = input("Enter your diary text:")
+    emotion = input("Enter your emotion (happy/sad/tired/etc):")
+    sentiment = float(input("Enter sentiment score (-1.0 to 1.0): "))
+    add_entry(text, emotion, sentiment)
+    print("\n Entry added successfully!\n")
+    print("All diary entries:\n")
+    for e in get_entries():
+        print(f"[{e['created_at']}]({e['emotion']}, {e['sentiment']}) -> {e['text']}")
+
+
+
+
