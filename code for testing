@@ -1,0 +1,39 @@
+import warnings
+warnings.filterwarnings("ignore")
+
+import streamlit as st
+from db import init_db, add_entry, get_entries
+from nlp import analyze_text
+
+init_db()
+st.title("AI Diary Companion")
+
+text = st.text_area("write your diary entry here:")
+
+if st.button("Analyze & Save"):
+    if text.strip():
+        emotion, sentiment = analyze_text(text)
+
+        add_entry(text, emotion, sentiment)
+
+        motivation_messages = {"Happy": "Keep shining! Every day is brighter when you carry this energy.",
+                               "Sad": "It's okay to feel low sometimes. Remember, every storm passes - you've got this.",
+                               "Anger": "Take a deep breath - channel that fire into strength, not stress.",
+                               "Fear": "Courage doesn't mean you're not scared - it means you move forward anyway.",
+                               "Surprise": "Life is full of suprises - embrace the unexpected!",
+                               "Love": "Love makes everything brighter. Keep spreading that warmth",
+                               "Disgust": "Not everything deserve your energy, Let go and rise above.",
+                               "Trust": "Keep believing in yourself and others - trust builds your world.",
+                               "Anticipation": "Exciting things are ahead - stay focused and positive!",
+                               "Neutral": "Every calm movement prepares you for greatness - stay grounded.",
+                               }
+        motivation = motivation_messages.get(emotion, "stay strong and keep moving forward.")
+
+        st.success(f" Saved!\n\n**Emotion:**{emotion}**, Sentiment: **{sentiment:.2f}**")
+        
+        st.markdown("### Motivation for you:")
+        
+        st.info(motivation)
+        
+    else:
+        st.warning("Please write something before analyzing.")
