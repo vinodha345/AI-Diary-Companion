@@ -1,7 +1,7 @@
 # 📓📒📓AI-Diary-Companion
 A simple Streamlit-based AI-powered diary app that stores your entries in a local SQLite database and provides **emotion detection**, **sentiment analysis**, and **motivational messages**.
 
-🧩 Problem Statement
+# 🧩 Problem Statement
 
 People often experience emotions they struggle to express or understand. Writing a diary helps, but a traditional diary cannot:
 1.Analyze how the user feels
@@ -10,7 +10,7 @@ People often experience emotions they struggle to express or understand. Writing
 3.Detect changes in emotional patterns over time
 As a result, users miss opportunities for self-reflection, emotional awareness, and mental well-being improvement.
 
-✅ Solution Overview
+# ✅ Solution Overview
 The AI Diary Companion provides an intelligent, user-friendly digital diary that:
 
 ✔️ 1. Analyzes the user’s emotions
@@ -39,7 +39,7 @@ A clean Streamlit interface enables users to:
 ✔️ 5. Lightweight and private
 Data is stored locally, ensuring privacy while keeping the app fast and easy to run.
 
-🚀 Features
+# 🚀 Features
 * 🧠 **Emotion Detection** using keyword analysis
 * 😊 **Sentiment Analysis** using TextBlob
 * 📦 **Local Storage** using SQLite
@@ -47,7 +47,7 @@ Data is stored locally, ensuring privacy while keeping the app fast and easy to 
 * 🖥️ **Beautiful UI** built with Streamlit
 * ✍️ Save and view all previous diary entries
 
-📁 Project Structure
+# 📁 Project Structure
 
 AI-Diary-Companion/
 │
@@ -65,40 +65,39 @@ AI-Diary-Companion/
 └── README.md
 
 
-📦 Installation
+# 📦 Installation
 
-1️⃣ Clone the repository
-#bash
-git clone https://github.com/your-username/AI-Diary-Companion.git
-cd AI-Diary-Companion
+ 1️⃣ Clone the repository
+ #bash
+ git clone https://github.com/your-username/AI-Diary-Companion.git
+ cd AI-Diary-Companion
 
 
-2️⃣ Create a virtual environment (optional but recommended)
+ 2️⃣ Create a virtual environment (optional but recommended)
 
-#bash
-python -m venv venv
-source venv/bin/activate   # macOS/Linux
-venv\Scripts\activate      # Windows
-```
+ #bash
+ python -m venv venv
+ source venv/bin/activate   # macOS/Linux
+ venv\Scripts\activate      # Windows
 
-3️⃣ Install dependencies
-Create this file:
-### **requirements.txt**
-streamlit
-textblob
-sqlite3-binary
+ 3️⃣ Install dependencies
+ Create this file:
+ ### **requirements.txt**
+ streamlit
+ textblob
+ sqlite3-binary
 
-Then run:
-#bash
-pip install -r requirements.txt
-python -m textblob.download_corpora
+ Then run:
+ #bash
+ pip install -r requirements.txt
+ python -m textblob.download_corpora
 
-▶️ Running the App
-#bash
-streamlit run app.py
-Open your browser → **[http://localhost:8501](http://localhost:8501)**
+ ▶️ Running the App
+ #bash
+ streamlit run app.py
+ Open your browser → **[http://localhost:8501](http://localhost:8501)**
 
-🧠 NLP Logic
+# 🧠 NLP Logic
 Sentiment:
 * Uses **TextBlob** polarity score
 * Ranges from **-1** (negative) to **+1** (positive)
@@ -107,7 +106,7 @@ Emotion:
   * Sentiment
   * Keyword matching (e.g., love, angry, scared)
 
-🗃️ Database
+# 🗃️ Database
 The app uses **SQLite** (`diary.db`) with columns:
 
 | Column     | Type      |
@@ -119,14 +118,14 @@ The app uses **SQLite** (`diary.db`) with columns:
 | sentiment  | REAL      |
 Automatically created when running the app.
 
-📌 Example Analysis
+# 🔗 Example Analysis
 "I love spending time with my family!"
 → Emotion: Love | Sentiment: +0.80
 
 "I'm terrified of the dark."
 → Emotion: Fear | Sentiment: -0.20
 
-🔚 Conclusion
+# 🔚 Conclusion
 The AI Diary Companion successfully transforms traditional diary writing into an intelligent and emotionally aware journaling experience. By combining sentiment analysis, emotion detection, and a user-friendly interface, the system helps users better understand their emotional patterns while offering personalized motivation for mental well-being.
 
 With secure local storage, lightweight design, and meaningful feedback, this project demonstrates how AI can positively support daily self-reflection and personal growth. The diary not only records what users write—but also helps them reflect, learn, and feel encouraged every day.
