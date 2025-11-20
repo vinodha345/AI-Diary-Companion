@@ -51,11 +51,17 @@ Data is stored locally, ensuring privacy while keeping the app fast and easy to 
 
 AI-Diary-Companion/
 │
+
 ├── app.py          # Main Streamlit UI
+
 ├── db.py           # Database operations (SQLite)
+
 ├── nlp.py          # Emotion & sentiment analysis
+
 ├── diary.db        # Database (auto-created)
+
 ├── requirements.txt
+
 └── README.md
 
 
