@@ -1,0 +1,52 @@
+from textblob import TextBlob
+import re
+
+def analyze_text(text):
+    """
+    Perform simple emotion and sentiment analysis.
+    Returns:
+        emotion (str): Dominant emotion detected from text.
+        sentiment (float): Sentiment polarity score (-1 to 1).
+    """
+    blob = TextBlob(text)
+    sentiment = blob.sentiment.polarity
+
+    if sentiment > 0.3:
+       emotion = "Happy"
+    elif sentiment < -0.3:
+       emotion = "Sad"
+    else:
+       emotion = "Neutral"
+
+    text_lower = text.lower()
+
+    emotion_keywords = {
+        "anger": ["angry", "furious", "rage", "hate", "annoyed", "irritated"],
+        "fear": ["afraid", "scared", "fear", "terrified", "nervous", "worried"],
+        "surprise": ["surprised", "amazed", "astonished", "shocked", "startled"],
+        "love": ["love", "adore", "fond", "cherish", "affection", "dear"],
+        "disgust": ["disgusted", "gross", "repulsed", "nauseated", "sick"],
+        "trust": ["trust", "confident", "secure", "faith", "believe"],
+        "anticipation": ["expect", "hope", "await", "looking forward"],
+        }
+    
+    for emo, keywords in emotion_keywords.items():
+     if any((re.search(rf"\b{word}\b", text_lower )) for word in keywords):
+         emotion = emo.capitalize()
+         break
+        
+    return emotion, sentiment
+
+examples = [
+    "I love spending time with my family!",
+    "I'm so angry about what happened.",
+    "I'm terrified of the dark.",
+    "That surprise party was amazing!",
+    "I feel sick and disgusted.",
+    "I trust you completely.",
+    "I'm looking forward to the trip!"
+]
+
+for sentence in examples:
+    print(f"{sentence} -> {analyze_text(sentence)}")
+
