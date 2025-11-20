@@ -39,9 +39,7 @@ venv\Scripts\activate      # Windows
 ```
 
 3️⃣ Install dependencies
-
 Create this file:
-
 ### **requirements.txt**
 streamlit
 textblob
@@ -53,7 +51,6 @@ pip install -r requirements.txt
 python -m textblob.download_corpora
 
 ▶️ Running the App
-
 #bash
 streamlit run app.py
 Open your browser → **[http://localhost:8501](http://localhost:8501)**
@@ -68,7 +65,6 @@ Emotion:
   * Keyword matching (e.g., love, angry, scared)
 
 🗃️ Database
-
 The app uses **SQLite** (`diary.db`) with columns:
 
 | Column     | Type      |
@@ -78,11 +74,9 @@ The app uses **SQLite** (`diary.db`) with columns:
 | text       | TEXT      |
 | emotion    | TEXT      |
 | sentiment  | REAL      |
-
 Automatically created when running the app.
 
 📌 Example Analysis
-
 "I love spending time with my family!"
 → Emotion: Love | Sentiment: +0.80
 
